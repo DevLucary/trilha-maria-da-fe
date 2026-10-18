@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* Fontes servidas pelo próprio site (internet ruim na feira) */
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/archivo-variavel.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url("/fonts/atkinson-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url("/fonts/atkinson-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+/*
+  Tokens da direção visual (ver "Direção visual" no CLAUDE.md).
+  As cores padrão do Tailwind são desligadas para que só a paleta aprovada exista.
+*/
+@theme {
+  --color-*: initial;
+  --color-terracota: #AD4F39;
+  --color-salmao: #E39B72;
+  --color-azul-placa: #1F4E9E;
+  --color-creme: #FBF3E8;
+  --color-verde-palmeira: #3F6B4A;
+  --color-marrom-portao: #523426;
+  --color-cinza-pedra: #8C8A86;
+  --color-cinza-texto: #6E6B66;
+  --color-branco: #FFFFFF;
+
+  --font-titulo: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --font-texto: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-creme);
+    color: var(--color-marrom-portao);
+    font-family: var(--font-texto);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Foco sempre visível para quem navega pelo teclado */
+  :focus-visible {
+    outline: 3px solid var(--color-azul-placa);
+    outline-offset: 3px;
+  }
+
+  button {
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+}
