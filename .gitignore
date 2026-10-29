@@ -29,10 +29,12 @@ dist-ssr
 # Variáveis de ambiente
 .env
 .env.*
-!.env.example
 
 # Arquivos de trabalho das skills de design (rascunhos e páginas de decisão)
 .impeccable/mocks/
 .impeccable/questions/
 .impeccable/review/
 .impeccable/decision-*.json
+.vercel
+.env*
+!.env.example
