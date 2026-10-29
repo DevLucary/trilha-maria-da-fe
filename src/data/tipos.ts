@@ -83,6 +83,43 @@ export type Parada = {
   blocos: Bloco[]
 }
 
+/**
+ * Foto do site (WebP ou AVIF em public/imagens).
+ * Sem `src`, aparece um bloco colorido provisório com o texto alternativo.
+ */
+export type Foto = {
+  src?: string
+  alt: string
+}
+
+export type ItemInformacao = {
+  rotulo: string
+  valor: string
+}
+
+export type CardMulticultural = {
+  titulo: string
+  texto: string
+  foto: Foto
+}
+
+export type Estacao = {
+  titulo: string
+  miniatura: Foto
+  descricao: string
+  foto: Foto
+  legenda: string
+}
+
+export type Contato = {
+  titulo: string
+  endereco: string
+  telefone: string
+  email: string
+  /** true enquanto os dados forem de exemplo: mostra o aviso "Dados fictícios". */
+  ficticio: boolean
+}
+
 export type Trilha = {
   /** Nome dividido em duas linhas, como aparece na placa do topo. */
   nome: {
@@ -90,5 +127,34 @@ export type Trilha = {
     destaque: string
   }
   escola: string
+  /** Nomes das abas fixas do topo. */
+  abas: {
+    inicio: string
+    roadmap: string
+  }
+  /** Fotos do carrossel, em qualquer quantidade. */
+  carrossel: Foto[]
+  inicio: {
+    frase: string
+    informacoes: {
+      titulo: string
+      itens: ItemInformacao[]
+    }
+    multiculturalismo: {
+      titulo: string
+      paragrafos: string[]
+    }
+    naCidade: {
+      titulo: string
+      cards: CardMulticultural[]
+    }
+  }
+  roadmap: {
+    titulo: string
+    instrucao: string
+    estacoes: Estacao[]
+  }
+  contato: Contato
+  /** Paradas das etapas anteriores (fora do layout atual; ver LAYOUT.md). */
   paradas: Parada[]
 }

@@ -1,12 +1,40 @@
-import { Cabecalho } from './components/trilha/Cabecalho'
-import { Trilha } from './components/trilha/Trilha'
+import { useEffect, useRef } from 'react'
+import { Abas } from './components/layout/Abas'
+import { Carrossel } from './components/layout/Carrossel'
+import { Rodape } from './components/layout/Rodape'
+import { PaginaInicial } from './components/paginas/PaginaInicial'
+import { PaginaRoadmap } from './components/paginas/PaginaRoadmap'
 import { trilha } from './data/trilha'
+import { usePagina } from './hooks/usePagina'
+
+const nomeDoSite = `${trilha.nome.primeiraLinha} ${trilha.nome.destaque}`
 
 function App() {
+  const pagina = usePagina()
+  const paginaAnterior = useRef(pagina)
+
+  // Ao trocar de aba: título da aba do navegador, volta ao topo e foco no título da página
+  // (assim leitores de tela anunciam a página nova).
+  useEffect(() => {
+    document.title = pagina === 'roadmap' ? `${trilha.abas.roadmap} · ${nomeDoSite}` : nomeDoSite
+    if (paginaAnterior.current === pagina) return
+    paginaAnterior.current = pagina
+    window.scrollTo(0, 0)
+    document.getElementById('titulo-pagina')?.focus({ preventScroll: true })
+  }, [pagina])
+
   return (
     <>
-      <Cabecalho nome={trilha.nome} escola={trilha.escola} />
-      <Trilha paradas={trilha.paradas} />
+      <Abas atual={pagina} rotulos={trilha.abas} />
+      <main>
+        <Carrossel fotos={trilha.carrossel} />
+        {pagina === 'inicio' ? (
+          <PaginaInicial nome={trilha.nome} conteudo={trilha.inicio} />
+        ) : (
+          <PaginaRoadmap conteudo={trilha.roadmap} />
+        )}
+      </main>
+      <Rodape contato={trilha.contato} />
     </>
   )
 }

@@ -46,6 +46,8 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
+    /* As abas ficam grudadas no topo: reserva espaço para não cobrirem o que recebe foco */
+    scroll-padding-top: 5rem;
   }
 
   body {

@@ -1,5 +1,5 @@
 import type { EstadoParada } from '../../lib/estadoParada'
-import { IconeConcluida } from './Icones'
+import { IconeConcluida } from '../Icones'
 
 type Props = {
   numero: number

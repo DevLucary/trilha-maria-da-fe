@@ -1,5 +1,5 @@
 import { descricaoDosBlocos } from '../../lib/blocos'
-import { IconeBloco } from './Icones'
+import { IconeBloco } from '../Icones'
 
 // Estado vazio de uma parada sem conteúdo: mostra os tipos de bloco que ela pode receber.
 export function ParadaVazia() {

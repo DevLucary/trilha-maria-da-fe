@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import type { TipoBloco } from '../../data/tipos'
+import type { TipoBloco } from '../data/tipos'
 
 // Ícones desenhados em SVG, todos com o mesmo traço (2px, pontas arredondadas).
 // São decorativos: o texto ao lado já diz o que significam (aria-hidden).
@@ -79,6 +79,64 @@ export function IconeConcluida({ className }: PropsIcone) {
   return (
     <Svg className={className}>
       <path d="m5 12.5 4.5 4.5L19 7.5" />
+    </Svg>
+  )
+}
+
+export function IconePausar({ className }: PropsIcone) {
+  return (
+    <Svg className={className}>
+      <path d="M9 5v14M15 5v14" />
+    </Svg>
+  )
+}
+
+export function IconeRetomar({ className }: PropsIcone) {
+  return (
+    <Svg className={className}>
+      <path d="M7 5v14l12-7-12-7Z" />
+    </Svg>
+  )
+}
+
+export function IconeAnterior({ className }: PropsIcone) {
+  return (
+    <Svg className={className}>
+      <path d="m15 6-6 6 6 6" />
+    </Svg>
+  )
+}
+
+export function IconeProxima({ className }: PropsIcone) {
+  return (
+    <Svg className={className}>
+      <path d="m9 6 6 6-6 6" />
+    </Svg>
+  )
+}
+
+export function IconeLocal({ className }: PropsIcone) {
+  return (
+    <Svg className={className}>
+      <path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z" />
+      <circle cx="12" cy="9.5" r="2.5" />
+    </Svg>
+  )
+}
+
+export function IconeTelefone({ className }: PropsIcone) {
+  return (
+    <Svg className={className}>
+      <path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z" />
+    </Svg>
+  )
+}
+
+export function IconeEmail({ className }: PropsIcone) {
+  return (
+    <Svg className={className}>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m4 7 8 6 8-6" />
     </Svg>
   )
 }

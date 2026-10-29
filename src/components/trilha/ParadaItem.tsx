@@ -1,6 +1,6 @@
 import type { Parada } from '../../data/tipos'
 import type { EstadoParada } from '../../lib/estadoParada'
-import { IconeSeta } from './Icones'
+import { IconeSeta } from '../Icones'
 import { NoParada } from './NoParada'
 import { ParadaVazia } from './ParadaVazia'
 
