@@ -7,8 +7,11 @@ type Props = {
   conteudo: Trilha['inicio']
 }
 
+// Tamanho do título acompanha a largura da coluna (7cqw), com máximo de 1.5rem:
+// assim uma palavra longa como "MULTICULTURALISMO?" cabe inteira em telas de 320 a 390 px.
+// break-words é a proteção final para palavras ainda maiores que vierem no conteúdo real.
 const estiloTituloSecao =
-  'font-titulo text-2xl font-extrabold uppercase leading-tight text-azul-placa [font-stretch:112%] text-balance'
+  'font-titulo text-[min(1.5rem,7cqw)] font-extrabold uppercase leading-tight text-azul-placa [font-stretch:112%] text-balance break-words'
 
 export function PaginaInicial({ nome, conteudo }: Props) {
   const { informacoes, multiculturalismo, naCidade } = conteudo
@@ -19,12 +22,14 @@ export function PaginaInicial({ nome, conteudo }: Props) {
         <p className="font-bold">{conteudo.frase}</p>
       </TituloPagina>
 
-      <div className="mx-auto grid max-w-xl gap-12 px-4 pt-8">
+      {/* Mesmo espaçamento lateral do Roadmap (px-4). A coluna é minmax(0,1fr) para nunca
+          esticar além da tela por causa de uma palavra comprida; @container ativa o cqw dos títulos. */}
+      <div className="@container mx-auto grid max-w-xl grid-cols-[minmax(0,1fr)] gap-12 px-4 pt-8">
         <section aria-labelledby="secao-informacoes">
           <h2 id="secao-informacoes" className={estiloTituloSecao}>
             {informacoes.titulo}
           </h2>
-          <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-3 rounded-md border-2 border-marrom-portao bg-salmao p-4">
+          <dl className="mt-4 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-3 rounded-md border-2 border-marrom-portao bg-salmao p-4">
             {informacoes.itens.map((item) => (
               <div key={item.rotulo} className="contents">
                 <dt className="font-titulo text-sm font-extrabold uppercase leading-6 tracking-[0.06em] [font-stretch:112%]">
@@ -58,7 +63,7 @@ export function PaginaInicial({ nome, conteudo }: Props) {
                   <FotoOuProvisoria foto={card.foto} indiceCor={i + 1} tamanho="media" />
                 </div>
                 <div className="p-3">
-                  <h3 className="text-balance font-titulo text-[1.0625rem] font-extrabold leading-tight [font-stretch:108%]">
+                  <h3 className="text-balance break-words font-titulo text-[1.0625rem] font-extrabold leading-tight [font-stretch:108%]">
                     {card.titulo}
                   </h3>
                   <p className="mt-1 leading-snug">{card.texto}</p>
