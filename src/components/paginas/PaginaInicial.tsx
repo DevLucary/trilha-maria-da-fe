@@ -1,5 +1,6 @@
 import type { Trilha } from '../../data/tipos'
 import { FotoOuProvisoria } from '../layout/FotoOuProvisoria'
+import { GrupoRevelar, Revelar } from '../Revelar'
 import { TituloPagina } from '../layout/TituloPagina'
 
 type Props = {
@@ -25,7 +26,7 @@ export function PaginaInicial({ nome, conteudo }: Props) {
       {/* Mesmo espaçamento lateral do Roadmap (px-4). A coluna é minmax(0,1fr) para nunca
           esticar além da tela por causa de uma palavra comprida; @container ativa o cqw dos títulos. */}
       <div className="@container mx-auto grid max-w-xl grid-cols-[minmax(0,1fr)] gap-12 px-4 pt-8">
-        <section aria-labelledby="secao-informacoes">
+        <Revelar como="section" aria-labelledby="secao-informacoes">
           <h2 id="secao-informacoes" className={estiloTituloSecao}>
             {informacoes.titulo}
           </h2>
@@ -39,9 +40,9 @@ export function PaginaInicial({ nome, conteudo }: Props) {
               </div>
             ))}
           </dl>
-        </section>
+        </Revelar>
 
-        <section aria-labelledby="secao-multiculturalismo">
+        <Revelar como="section" aria-labelledby="secao-multiculturalismo">
           <h2 id="secao-multiculturalismo" className={estiloTituloSecao}>
             {multiculturalismo.titulo}
           </h2>
@@ -50,27 +51,32 @@ export function PaginaInicial({ nome, conteudo }: Props) {
               <p key={i}>{paragrafo}</p>
             ))}
           </div>
-        </section>
+        </Revelar>
 
+        {/* Aqui só o título e os cards animam (cada um por si), para o deslocamento não somar */}
         <section aria-labelledby="secao-na-cidade">
-          <h2 id="secao-na-cidade" className={estiloTituloSecao}>
-            {naCidade.titulo}
-          </h2>
-          <ul className="mt-4 grid grid-cols-2 gap-3">
-            {naCidade.cards.map((card, i) => (
-              <li key={i} className="overflow-hidden rounded-md border-2 border-cinza-pedra bg-creme">
-                <div className="aspect-[4/3]">
-                  <FotoOuProvisoria foto={card.foto} indiceCor={i + 1} tamanho="media" />
-                </div>
-                <div className="p-3">
-                  <h3 className="text-balance break-words font-titulo text-[1.0625rem] font-extrabold leading-tight [font-stretch:108%]">
-                    {card.titulo}
-                  </h3>
-                  <p className="mt-1 leading-snug">{card.texto}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <Revelar>
+            <h2 id="secao-na-cidade" className={estiloTituloSecao}>
+              {naCidade.titulo}
+            </h2>
+          </Revelar>
+          <GrupoRevelar>
+            <ul className="mt-4 grid grid-cols-2 gap-3">
+              {naCidade.cards.map((card, i) => (
+                <Revelar key={i} como="li" className="overflow-hidden rounded-md border-2 border-cinza-pedra bg-creme">
+                  <div className="aspect-[4/3]">
+                    <FotoOuProvisoria foto={card.foto} indiceCor={i + 1} tamanho="media" />
+                  </div>
+                  <div className="p-3">
+                    <h3 className="text-balance break-words font-titulo text-[1.0625rem] font-extrabold leading-tight [font-stretch:108%]">
+                      {card.titulo}
+                    </h3>
+                    <p className="mt-1 leading-snug">{card.texto}</p>
+                  </div>
+                </Revelar>
+              ))}
+            </ul>
+          </GrupoRevelar>
         </section>
       </div>
     </>

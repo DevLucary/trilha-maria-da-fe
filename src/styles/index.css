@@ -104,6 +104,14 @@
     box-shadow: 0 8px 18px -8px rgb(82 52 38 / 0.55);
   }
 
+  /* Na impressão, nada fica escondido pela animação de entrada */
+  @media print {
+    [data-revelar] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
   /* Trecho da trilha ainda não percorrido */
   .linha-tracejada {
     background-image: repeating-linear-gradient(

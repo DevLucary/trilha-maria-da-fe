@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { Abas } from './components/layout/Abas'
 import { Carrossel } from './components/layout/Carrossel'
 import { Rodape } from './components/layout/Rodape'
@@ -14,8 +14,9 @@ function App() {
   const paginaAnterior = useRef(pagina)
 
   // Ao trocar de aba: título da aba do navegador, volta ao topo e foco no título da página
-  // (assim leitores de tela anunciam a página nova).
-  useEffect(() => {
+  // (assim leitores de tela anunciam a página nova). É layout effect para voltar ao topo
+  // antes da primeira pintura da página nova.
+  useLayoutEffect(() => {
     document.title = pagina === 'roadmap' ? `${trilha.abas.roadmap} · ${nomeDoSite}` : nomeDoSite
     if (paginaAnterior.current === pagina) return
     paginaAnterior.current = pagina

@@ -1,6 +1,7 @@
 import type { Estacao } from '../../data/tipos'
 import { IconeSeta } from '../Icones'
 import { FotoOuProvisoria } from '../layout/FotoOuProvisoria'
+import { Revelar } from '../Revelar'
 
 type Props = {
   estacao: Estacao
@@ -14,7 +15,11 @@ export function EstacaoItem({ estacao, numero, aberta, aoAlternar }: Props) {
   const idConteudo = `estacao-${numero}-conteudo`
 
   return (
-    <li className="grid grid-cols-[4.5rem_1fr] items-start gap-x-3">
+    <Revelar como="li" className="relative grid grid-cols-[4.5rem_1fr] items-start gap-x-3">
+      {/* Trecho da linha tracejada: do centro desta miniatura até o centro da próxima
+          (36 px da miniatura + 20 px do espaço entre itens). Aparece junto com a estação. */}
+      <span aria-hidden="true" className="linha-tracejada absolute -bottom-14 left-[2.125rem] top-9 w-1" />
+
       <div className="relative z-10 size-18">
         <div className="size-full overflow-hidden rounded-md border-2 border-marrom-portao bg-creme">
           <FotoOuProvisoria foto={estacao.miniatura} indiceCor={numero - 1} tamanho="compacta" />
@@ -67,6 +72,6 @@ export function EstacaoItem({ estacao, numero, aberta, aoAlternar }: Props) {
           </div>
         )}
       </div>
-    </li>
+    </Revelar>
   )
 }

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { Trilha } from '../../data/tipos'
 import { TituloPagina } from '../layout/TituloPagina'
 import { EstacaoItem } from '../roadmap/EstacaoItem'
+import { GrupoRevelar, Revelar } from '../Revelar'
 
 type Props = {
   conteudo: Trilha['roadmap']
@@ -17,27 +18,28 @@ export function PaginaRoadmap({ conteudo }: Props) {
         <p className="font-bold">{conteudo.instrucao}</p>
       </TituloPagina>
 
-      <div className="relative mx-auto max-w-xl px-4 pt-8">
-        {/* Linha tracejada que liga as miniaturas, do centro da primeira até o marco "Fim" */}
-        <span aria-hidden="true" className="linha-tracejada absolute bottom-[1.375rem] left-[3.125rem] top-[4.25rem] w-1" />
+      <div className="mx-auto max-w-xl px-4 pt-8">
+        {/* Cada estação desenha seu trecho de linha (ver EstacaoItem) e entra ao rolar, em sequência */}
+        <GrupoRevelar>
+          <ol className="grid gap-5">
+            {conteudo.estacoes.map((estacao, i) => (
+              <EstacaoItem
+                key={i}
+                estacao={estacao}
+                numero={i + 1}
+                aberta={indiceAberto === i}
+                aoAlternar={() => setIndiceAberto((aberto) => (aberto === i ? null : i))}
+              />
+            ))}
+          </ol>
 
-        <ol className="relative grid gap-5">
-          {conteudo.estacoes.map((estacao, i) => (
-            <EstacaoItem
-              key={i}
-              estacao={estacao}
-              numero={i + 1}
-              aberta={indiceAberto === i}
-              aoAlternar={() => setIndiceAberto((aberto) => (aberto === i ? null : i))}
-            />
-          ))}
-        </ol>
-
-        <div className="relative mt-5 grid grid-cols-[4.5rem_1fr] items-center gap-x-3">
-          <p className="grid h-11 place-items-center rounded-md border-2 border-marrom-portao bg-creme font-titulo text-sm font-black uppercase tracking-[0.08em] [font-stretch:115%]">
-            Fim
-          </p>
-        </div>
+          {/* "relative" põe o marco por cima do último trecho de linha */}
+          <Revelar className="relative mt-5 grid grid-cols-[4.5rem_1fr] items-center gap-x-3">
+            <p className="grid h-11 place-items-center rounded-md border-2 border-marrom-portao bg-creme font-titulo text-sm font-black uppercase tracking-[0.08em] [font-stretch:115%]">
+              Fim
+            </p>
+          </Revelar>
+        </GrupoRevelar>
       </div>
     </>
   )
