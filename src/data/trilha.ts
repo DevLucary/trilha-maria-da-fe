@@ -5,6 +5,9 @@ import type { Grupo, Sala, Trilha } from './tipos'
 // Fotos sem "src" aparecem como blocos coloridos com o texto alternativo.
 // Quantidades são livres: dá para ter 3 ou 30 fotos, cards, salas ou grupos.
 
+// Local da feira (confirmado). Uma única fonte: vale para "Informações da feira" e para o rodapé.
+const LOCAL_DA_FEIRA = 'Escola Estadual Nossa Senhora de Lourdes — Rua Padre Juca, 225, Centro, Maria da Fé (MG)'
+
 // Salas provisórias, geradas para não repetir o mesmo texto várias vezes.
 // Cada número da lista é a quantidade de grupos daquela sala (variação de propósito).
 // Quando o conteúdo real chegar, troque por uma lista escrita à mão.
@@ -50,7 +53,7 @@ export const trilha: Trilha = {
       itens: [
         { rotulo: 'Data', valor: '[data]' },
         { rotulo: 'Horário', valor: '[horário]' },
-        { rotulo: 'Local', valor: '[local]' },
+        { rotulo: 'Local', valor: LOCAL_DA_FEIRA },
         { rotulo: 'Entrada', valor: '[entrada]' },
       ],
     },
@@ -79,7 +82,7 @@ export const trilha: Trilha = {
 
   contato: {
     titulo: 'Contato',
-    endereco: 'Rua Exemplo, 000 – Bairro Exemplo',
+    endereco: LOCAL_DA_FEIRA,
     telefone: '(00) 0000-0000',
     email: 'contato@example.com',
     ficticio: true,
