@@ -41,6 +41,10 @@ npm run lint
 
 Manual, com `npx vercel --prod --yes`, publicado em https://trilha-maria-da-fe.vercel.app. A pasta precisa estar ligada ao projeto da Vercel (`npx vercel link --project trilha-maria-da-fe`). O `.env.local` e a pasta `.vercel` são criados pela ligação e não vão para o Git.
 
+## Sobre o desenvolvimento
+
+Este projeto foi feito com o apoio de inteligência artificial (Claude, da Anthropic, usado pelo Claude Code e pelo aplicativo Claude), tanto no código quanto nos textos provisórios do site.
+
 ## Avisos
 
 - Repositório privado.
