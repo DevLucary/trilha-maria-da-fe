@@ -48,6 +48,14 @@ O conteúdo de cada parada **será enviado por mim depois**. Portanto:
 - Progresso salvo em `localStorage`, com opção de **reiniciar a trilha**.
 - Navegação livre: o visitante pode abrir qualquer parada, mesmo fora de ordem (não travar conteúdo).
 
+## Roadmap: salas e grupos (atualizado em 12/11/2026)
+
+- O que antes se chamava "estação" agora é **sala**. Cada sala tem **grupos da sala** (os projetos).
+- No arquivo de dados: `roadmap.salas`, com tipos `Sala` (título, descrição, imagem opcional, `grupos`) e `Grupo` (rótulo, título, descrição, imagem opcional). Imagem, quando existe, tem `alt` obrigatório.
+- Cada sala tem endereço próprio: **`#/sala/N`** (N = posição da sala na lista, começando em 1). Endereço inválido (`#/sala/99`, `#/sala`) leva ao roadmap.
+- Quantidade de salas e de grupos sai do arquivo de dados; a contagem exibida é calculada pelo tamanho da lista.
+- Sem botão de votação por enquanto (depende de confirmação e de link real).
+
 ## Blocos de conteúdo (reutilizáveis)
 
 Cada parada é composta por uma lista de blocos. Criar componentes para:

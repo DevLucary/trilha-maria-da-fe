@@ -1,22 +1,28 @@
-import type { Estacao, Trilha } from './tipos'
+import type { Grupo, Sala, Trilha } from './tipos'
 
 // Todo o conteúdo do site fica neste arquivo.
 // Os textos abaixo são PROVISÓRIOS: servem só para ver o layout funcionando.
 // Fotos sem "src" aparecem como blocos coloridos com o texto alternativo.
-// Quantidades são livres: dá para ter 3 ou 30 fotos, cards ou estações.
+// Quantidades são livres: dá para ter 3 ou 30 fotos, cards, salas ou grupos.
 
-// Estações provisórias, geradas para não repetir o mesmo texto 8 vezes.
+// Salas provisórias, geradas para não repetir o mesmo texto várias vezes.
+// Cada número da lista é a quantidade de grupos daquela sala (variação de propósito).
 // Quando o conteúdo real chegar, troque por uma lista escrita à mão.
-const estacoesProvisorias: Estacao[] = Array.from({ length: 8 }, (_, i) => {
-  const n = i + 1
-  return {
-    titulo: `Título da estação ${n}`,
-    miniatura: { alt: `Miniatura da estação ${n} (a definir)` },
-    descricao: `Texto de exemplo: aqui entra a descrição da estação ${n}.`,
-    foto: { alt: `Foto da estação ${n} (a definir)` },
-    legenda: `Legenda de exemplo da foto da estação ${n}.`,
-  }
-})
+const gruposPorSalaProvisorio = [4, 3, 5, 3, 1]
+
+function gruposProvisorios(quantidade: number): Grupo[] {
+  return Array.from({ length: quantidade }, (_, i) => ({
+    rotulo: `Grupo ${i + 1}`,
+    titulo: `Título do projeto do grupo ${i + 1} (provisório)`,
+    descricao: `Descrição do projeto do grupo ${i + 1} (texto provisório).`,
+  }))
+}
+
+const salasProvisorias: Sala[] = gruposPorSalaProvisorio.map((quantidade, i) => ({
+  titulo: `Título da sala ${i + 1} (provisório)`,
+  descricao: `Descrição da sala ${i + 1} (texto provisório).`,
+  grupos: gruposProvisorios(quantidade),
+}))
 
 export const trilha: Trilha = {
   nome: {
@@ -67,8 +73,8 @@ export const trilha: Trilha = {
 
   roadmap: {
     titulo: 'Roadmap',
-    instrucao: 'Toque na seta de cada estação para ver a descrição.',
-    estacoes: estacoesProvisorias,
+    instrucao: 'Toque na seta de cada sala para ver a descrição.',
+    salas: salasProvisorias,
   },
 
   contato: {

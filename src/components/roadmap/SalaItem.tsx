@@ -1,28 +1,30 @@
-import type { Estacao } from '../../data/tipos'
-import { IconeSeta } from '../Icones'
+import type { Sala } from '../../data/tipos'
+import { enderecoDaSala } from '../../hooks/usePagina'
+import { quantidadeDeGrupos } from '../../lib/grupos'
+import { IconeProxima, IconeSeta } from '../Icones'
 import { FotoOuProvisoria } from '../layout/FotoOuProvisoria'
 import { Revelar } from '../Revelar'
 
 type Props = {
-  estacao: Estacao
+  sala: Sala
   numero: number
   aberta: boolean
   aoAlternar: () => void
 }
 
-// Uma estação do roadmap: miniatura com selo numerado e botão que abre a descrição.
-export function EstacaoItem({ estacao, numero, aberta, aoAlternar }: Props) {
-  const idConteudo = `estacao-${numero}-conteudo`
+// Uma sala do roadmap: miniatura com selo numerado e botão que abre o painel da sala.
+export function SalaItem({ sala, numero, aberta, aoAlternar }: Props) {
+  const idConteudo = `sala-${numero}-conteudo`
 
   return (
-    <Revelar como="li" className="relative grid grid-cols-[4.5rem_1fr] items-start gap-x-3">
+    <Revelar como="li" className="relative grid grid-cols-[4.5rem_minmax(0,1fr)] items-start gap-x-3">
       {/* Trecho da linha tracejada: do centro desta miniatura até o centro da próxima
-          (36 px da miniatura + 20 px do espaço entre itens). Aparece junto com a estação. */}
+          (36 px da miniatura + 20 px do espaço entre itens). Aparece junto com a sala. */}
       <span aria-hidden="true" className="linha-tracejada absolute -bottom-14 left-[2.125rem] top-9 w-1" />
 
       <div className="relative z-10 size-18">
         <div className="size-full overflow-hidden rounded-md border-2 border-marrom-portao bg-creme">
-          <FotoOuProvisoria foto={estacao.miniatura} indiceCor={numero - 1} tamanho="compacta" />
+          <FotoOuProvisoria foto={sala.imagem} indiceCor={numero - 1} tamanho="compacta" />
         </div>
         <span
           aria-hidden="true"
@@ -45,10 +47,10 @@ export function EstacaoItem({ estacao, numero, aberta, aoAlternar }: Props) {
           >
             <span className="min-w-0 flex-1">
               <span className="block font-titulo text-sm font-extrabold uppercase tracking-[0.08em] [font-stretch:112%]">
-                Estação {numero}
+                Sala {numero}
               </span>
-              <span className="mt-0.5 block text-balance font-titulo text-xl font-extrabold leading-tight [font-stretch:108%]">
-                {estacao.titulo}
+              <span className="mt-0.5 block text-balance break-words font-titulo text-xl font-extrabold leading-tight [font-stretch:108%]">
+                {sala.titulo}
               </span>
             </span>
             <span
@@ -62,13 +64,15 @@ export function EstacaoItem({ estacao, numero, aberta, aoAlternar }: Props) {
 
         {aberta && (
           <div id={idConteudo} className="mt-2 rounded-md border-2 border-cinza-pedra bg-creme p-4">
-            <p>{estacao.descricao}</p>
-            <figure className="mt-4">
-              <div className="aspect-[4/3] overflow-hidden rounded-md">
-                <FotoOuProvisoria foto={estacao.foto} indiceCor={numero} />
-              </div>
-              <figcaption className="mt-2 text-cinza-texto">{estacao.legenda}</figcaption>
-            </figure>
+            <p className="break-words">{sala.descricao}</p>
+            <p className="mt-3 font-bold">{quantidadeDeGrupos(sala.grupos.length)} nesta sala</p>
+            <a
+              href={enderecoDaSala(numero)}
+              className="mt-4 flex min-h-12 items-center justify-center gap-2 rounded-md bg-azul-placa px-4 font-titulo font-extrabold uppercase tracking-[0.04em] text-branco [font-stretch:112%] hover:bg-marrom-portao"
+            >
+              Ver sala
+              <IconeProxima className="size-5" />
+            </a>
           </div>
         )}
       </div>

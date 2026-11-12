@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { Trilha } from '../../data/tipos'
 import { TituloPagina } from '../layout/TituloPagina'
-import { EstacaoItem } from '../roadmap/EstacaoItem'
+import { SalaItem } from '../roadmap/SalaItem'
 import { GrupoRevelar, Revelar } from '../Revelar'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export function PaginaRoadmap({ conteudo }: Props) {
-  // Só uma estação aberta por vez: abrir outra fecha a anterior.
+  // Só uma sala aberta por vez: abrir outra fecha a anterior.
   const [indiceAberto, setIndiceAberto] = useState<number | null>(null)
 
   return (
@@ -19,13 +19,13 @@ export function PaginaRoadmap({ conteudo }: Props) {
       </TituloPagina>
 
       <div className="mx-auto max-w-xl px-4 pt-8">
-        {/* Cada estação desenha seu trecho de linha (ver EstacaoItem) e entra ao rolar, em sequência */}
+        {/* Cada sala desenha seu trecho de linha (ver SalaItem) e entra ao rolar, em sequência */}
         <GrupoRevelar>
           <ol className="grid gap-5">
-            {conteudo.estacoes.map((estacao, i) => (
-              <EstacaoItem
+            {conteudo.salas.map((sala, i) => (
+              <SalaItem
                 key={i}
-                estacao={estacao}
+                sala={sala}
                 numero={i + 1}
                 aberta={indiceAberto === i}
                 aoAlternar={() => setIndiceAberto((aberto) => (aberto === i ? null : i))}

@@ -32,6 +32,7 @@ Site-guia interativo em forma de trilha vertical (roadmap): o visitante abre cad
 ## Capabilities and Constraints
 
 - 8 paradas por padrão, número fácil de mudar; todo o conteúdo em um único arquivo de dados (`src/data/trilha.ts`).
+- Roadmap (12/11/2026): as antigas "estações" agora são **salas**, cada uma com **grupos** (projetos). Cada sala tem endereço próprio `#/sala/N`. Quantidade de salas e de grupos livre, vinda do arquivo de dados.
 - Blocos reutilizáveis: texto, imagem/galeria, cards que viram, linha do tempo, quiz rápido, depoimento, áudio/vídeo.
 - Fora do escopo: mural coletivo, mapa interativo, selo/passaporte final, login, backend, layout específico de desktop.
 - Modo claro por padrão; modo escuro opcional. PWA opcional.

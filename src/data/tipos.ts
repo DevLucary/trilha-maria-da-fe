@@ -103,12 +103,30 @@ export type CardMulticultural = {
   foto: Foto
 }
 
-export type Estacao = {
+/** Imagem real (WebP ou AVIF em public/imagens). Quando existir, o texto alternativo é obrigatório. */
+export type ImagemComAlt = {
+  src: string
+  alt: string
+}
+
+/** Um grupo (projeto) dentro de uma sala. */
+export type Grupo = {
+  /** Rótulo que identifica o grupo na sala, ex.: "Grupo 1". */
+  rotulo: string
   titulo: string
-  miniatura: Foto
   descricao: string
-  foto: Foto
-  legenda: string
+  /** Sem imagem, aparece um bloco colorido com "Foto provisória". */
+  imagem?: ImagemComAlt
+}
+
+/** Uma sala do roadmap. O número da sala (e o endereço #/sala/N) vem da posição na lista. */
+export type Sala = {
+  titulo: string
+  descricao: string
+  /** Usada na miniatura do roadmap. Sem imagem, aparece um bloco colorido provisório. */
+  imagem?: ImagemComAlt
+  /** Quantidade livre; lista vazia mostra "Grupos em preparação". */
+  grupos: Grupo[]
 }
 
 export type Contato = {
@@ -152,7 +170,7 @@ export type Trilha = {
   roadmap: {
     titulo: string
     instrucao: string
-    estacoes: Estacao[]
+    salas: Sala[]
   }
   contato: Contato
   /** Paradas das etapas anteriores (fora do layout atual; ver LAYOUT.md). */
